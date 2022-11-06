@@ -1,7 +1,11 @@
+import { Suspense } from 'react'
+import NoteList from './NoteList.server'
+
 import SearchField from './SearchField.client'
 
 export default function App({ selectedId, isEditing, searchText }) {
-  console.log('App', selectedId, isEditing, searchText)
+  // console.log('App', selectedId, isEditing, searchText)
+
   return (
     <div className="main">
       <section className="col sidebar">
@@ -19,6 +23,11 @@ export default function App({ selectedId, isEditing, searchText }) {
         <section className="sidebar-menu" role="menubar">
           <SearchField />
         </section>
+        <nav>
+          <Suspense fallback={<div>Loading...</div>}>
+            <NoteList searchText={searchText} />
+          </Suspense>
+        </nav>
       </section>
     </div>
   )
